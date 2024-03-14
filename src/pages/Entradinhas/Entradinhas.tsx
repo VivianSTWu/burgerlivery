@@ -107,7 +107,7 @@ export default function Entradinhas() {
                   ))}
                 </Form>
               </ProductCardPrice>
-              <img src={product.image[0]} alt={product.title} />
+              <img src={product.image} alt={product.title} />
             </ProductCard>
           ))
         )}

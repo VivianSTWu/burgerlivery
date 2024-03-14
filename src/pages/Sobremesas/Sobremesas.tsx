@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { Button, CategoryList, Layout, ProductCard } from "../../components";
-import { ProductCategories, ProductWrapper } from "./Hamburgers.style";
+import { ProductCategories, ProductWrapper } from "./Sobremesas.style";
 import {
   ProductCardContent,
   ProductCardPrice,
 } from "../../components/ProductCard/ProductCard.style";
 import { useNavigate } from "react-router-dom";
 
-export default function Hamburgers() {
+export default function Sobremesas() {
   const [isLoading, setIsLoading] = useState(false)
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
@@ -37,8 +37,8 @@ export default function Hamburgers() {
     }
   }
 
-  const getHamburgers = async () => {
-    const url = "http://localhost:8000/hamburgers";
+  const getDesserts = async () => {
+    const url = "http://localhost:8000/desserts";
     setIsLoading(true);
 
     try {
@@ -61,12 +61,12 @@ export default function Hamburgers() {
   }, []);
 
   useEffect(() => {
-    getHamburgers();
+    getDesserts();
   }, []);
 
   return (
     <Layout>
-      <h1>Hamburgers</h1>
+      <h1>Sobremesas</h1>
       <ProductCategories>
         {isLoading ? (
           <p>Carregando</p>
@@ -88,9 +88,9 @@ export default function Hamburgers() {
                 <Button onClick={() => { }}>Adicionar</Button>
               </ProductCardContent>
               <ProductCardPrice>
-                {priceFormat(product.values.single)}
+                {priceFormat(product.value)}
               </ProductCardPrice>
-              <img src={product.image[0]} alt={product.title} />
+              <img src={product.image} alt={product.title} />
             </ProductCard>
           ))
         )}
