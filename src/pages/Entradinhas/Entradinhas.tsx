@@ -1,15 +1,21 @@
 import { useEffect, useState } from "react";
 import { Button, CategoryList, Layout, ProductCard } from "../../components";
-import { ProductCategories, ProductWrapper } from "./Hamburgers.style";
+import { ProductCategories, ProductWrapper, Form} from "./Entradinhas.style";
 import {
   ProductCardContent,
   ProductCardPrice,
 } from "../../components/ProductCard/ProductCard.style";
 
-export default function Hamburgers() {
-  const [isLoading, setIsLoading] = useState(false)
+export default function Entradinhas() {
+  const [isLoading, setIsLoading] = useState(false);
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
+  const [valorSelecionado, setValorSelecionado] = useState('');
+  const size = ['small', 'large'];
+
+  const handleChange = (event) => {
+    setValorSelecionado(event.target.value);
+  };
 
   const priceFormat = (price: number) => {
     return new Intl.NumberFormat("pt-BR", {
@@ -36,9 +42,9 @@ export default function Hamburgers() {
     }
   }
 
-  const getHamburgers = async () => {
-    const url = "http://localhost:8000/hamburgers";
-    setIsLoading(true);
+  const getAppetizers = async () => {
+    const url = "http://localhost:8000/appetizers";
+    //setIsLoading(true);
 
     try {
       const response = await fetch(url);
@@ -55,17 +61,16 @@ export default function Hamburgers() {
   }
 
   useEffect(() => {
-    //setCategories(categoriesList);
     getCategories();
   }, []);
 
   useEffect(() => {
-    getHamburgers();
+    getAppetizers();
   }, []);
 
   return (
     <Layout>
-      <h1>Hamburgers</h1>
+      <h1>Entradinhas</h1>
       <ProductCategories>
         {isLoading ? (
           <p>Carregando</p>
@@ -87,7 +92,20 @@ export default function Hamburgers() {
                 <Button onClick={() => { }}>Adicionar</Button>
               </ProductCardContent>
               <ProductCardPrice>
-                {priceFormat(product.values.single)}
+                {priceFormat(product.values)}
+                <Form>
+                  {size.map(opcao => (
+                    <label key={opcao}>
+                      <input
+                        type="radio"
+                        value={opcao}
+                        checked={valorSelecionado === opcao}
+                        onChange={handleChange}
+                      />
+                      {opcao}
+                    </label>
+                  ))}
+                </Form>
               </ProductCardPrice>
               <img src={product.image[0]} alt={product.title} />
             </ProductCard>
