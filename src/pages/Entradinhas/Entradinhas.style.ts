@@ -19,4 +19,13 @@ export const Form = styled.div`
   justify-content: flex-end;
   margin: 16px 0px;
   font-size: 16px;
+
+  & label {
+    margin-left: 10px;
+    font-size: 16px;
+  }
+
+  & input[type=radio] {
+    margin: 16px 2px;
+  }
 `;

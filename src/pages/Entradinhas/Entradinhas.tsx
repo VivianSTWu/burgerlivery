@@ -10,12 +10,7 @@ export default function Entradinhas() {
   const [isLoading, setIsLoading] = useState(false);
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
-  const [valorSelecionado, setValorSelecionado] = useState('');
-  const size = ['small', 'large'];
-
-  const handleChange = (event) => {
-    setValorSelecionado(event.target.value);
-  };
+  const [size, setSize] = useState("");
 
   const priceFormat = (price: number) => {
     return new Intl.NumberFormat("pt-BR", {
@@ -92,20 +87,17 @@ export default function Entradinhas() {
                 <Button onClick={() => { }}>Adicionar</Button>
               </ProductCardContent>
               <ProductCardPrice>
-                {priceFormat(product.values)}
+                
                 <Form>
-                  {size.map(opcao => (
-                    <label key={opcao}>
-                      <input
-                        type="radio"
-                        value={opcao}
-                        checked={valorSelecionado === opcao}
-                        onChange={handleChange}
-                      />
-                      {opcao}
-                    </label>
-                  ))}
+                  <label htmlFor="pequena">
+                  <input type="radio" name="tamanho" value="pequena" id="pequena" onChange={handleClickSmall}/>
+                  PEQUENA
+                  </label>
+                  <label htmlFor="grande">
+                  <input type="radio" name="tamanho" value="grande" id="grande" onChange={handleClickLarge}/>
+                  GRANDE</label>
                 </Form>
+                {priceFormat(product.value)}
               </ProductCardPrice>
               <img src={product.image} alt={product.title} />
             </ProductCard>
