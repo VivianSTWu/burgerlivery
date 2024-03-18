@@ -5,7 +5,6 @@ import {
   ProductCardContent,
   ProductCardPrice,
 } from "../../components/ProductCard/ProductCard.style";
-import { useNavigate } from "react-router-dom";
 
 export default function Sobremesas() {
   const [isLoading, setIsLoading] = useState(false)

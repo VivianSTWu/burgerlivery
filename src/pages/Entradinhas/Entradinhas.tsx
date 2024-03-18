@@ -10,7 +10,9 @@ export default function Entradinhas() {
   const [isLoading, setIsLoading] = useState(false);
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
-  const [size, setSize] = useState("");
+  //const [size, setSize] = useState("");
+
+
 
   const priceFormat = (price: number) => {
     return new Intl.NumberFormat("pt-BR", {
@@ -39,7 +41,6 @@ export default function Entradinhas() {
 
   const getAppetizers = async () => {
     const url = "http://localhost:8000/appetizers";
-    //setIsLoading(true);
 
     try {
       const response = await fetch(url);
@@ -54,6 +55,16 @@ export default function Entradinhas() {
       setIsLoading(false);
     }
   }
+
+  /*const handleChange = async (e) => {
+    const value = e.target.value;
+    setSize(value);
+
+    products.map((product, index) => (
+      size = product.value;
+    ))
+
+  }*/
 
   useEffect(() => {
     getCategories();
@@ -87,14 +98,13 @@ export default function Entradinhas() {
                 <Button onClick={() => { }}>Adicionar</Button>
               </ProductCardContent>
               <ProductCardPrice>
-                
                 <Form>
                   <label htmlFor="pequena">
-                  <input type="radio" name="tamanho" value="pequena" id="pequena" onChange={handleClickSmall}/>
+                  <input type="radio" name="tamanho" value="pequena" id="pequena" /*onClick={handleChange}*/></input>
                   PEQUENA
                   </label>
                   <label htmlFor="grande">
-                  <input type="radio" name="tamanho" value="grande" id="grande" onChange={handleClickLarge}/>
+                  <input type="radio" name="tamanho" value="grande" id="grande" /*onClick={handleChange}*//>
                   GRANDE</label>
                 </Form>
                 {priceFormat(product.value)}
